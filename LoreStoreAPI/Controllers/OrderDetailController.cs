@@ -24,27 +24,37 @@ namespace LoreStoreAPI.Controllers
 
         // GET api/<OrderDetailController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public OrderDetail Get(int id)
         {
-            return "value";
+            return _orderDetailData.GetOrderDetailsById(id);
+        }
+
+        // GET api/<OrderDetailController>/5
+        [HttpGet("OrderId/{id}")]
+        public List<OrderDetail> GetByOrderId(int id)
+        {
+            return _orderDetailData.GetOrderDetailsByOrderId(id);
         }
 
         // POST api/<OrderDetailController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] OrderDetail orderDetail)
         {
+            _orderDetailData.AddOrderDetail(orderDetail);
         }
 
         // PUT api/<OrderDetailController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] OrderDetail orderDetail)
         {
+            _orderDetailData.UpdateOrderDetail(id, orderDetail);
         }
 
         // DELETE api/<OrderDetailController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _orderDetailData.DeleteOrderDetail(id);
         }
     }
 }
