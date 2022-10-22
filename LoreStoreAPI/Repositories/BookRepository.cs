@@ -16,7 +16,7 @@ namespace backend.Repositories
             using (SqlConnection conn = Connection)
             {
                 conn.Open();
-                using (SqlCommand cmd = Connection.CreateCommand())
+                using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
                                 SELECT id,
@@ -42,16 +42,16 @@ namespace backend.Repositories
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("id")),
                                 Title = reader.GetString(reader.GetOrdinal("title")),
-                                AuthorFirstName = reader.GetString(reader.GetOrdinal("authorFirstName")),
-                                AuthorLastName = reader.GetString(reader.GetOrdinal("authorLastName")),
-                                DatePublished = reader.GetString(reader.GetOrdinal("datePublished")),
+                                AuthorFirstName = reader[reader.GetOrdinal("authorFirstName")] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("authorFirstName")),
+                                AuthorLastName = reader[reader.GetOrdinal("authorLastName")] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("authorLastName")),
+                                DatePublished = reader.GetDateTime(reader.GetOrdinal("datePublished")),
                                 Description = reader.GetString(reader.GetOrdinal("description")),
-                                IsFiction = reader.GetInt32(reader.GetOrdinal("isFiction")),
+                                IsFiction = reader.GetBoolean(reader.GetOrdinal("isFiction")),
                                 SubGenre = reader.GetString(reader.GetOrdinal("subGenre")),
-                                Price = reader.GetFloat(reader.GetOrdinal("price")),
-                                InventoryQuantity = reader.GetInt32(reader.GetOrdinal("inventoryQuantity")),
-                                PhotoUrl = reader.GetString(reader.GetOrdinal("photoUrl"))
-                            };
+                                Price = reader.GetDouble(reader.GetOrdinal("price")),
+                                InventoryQuantity = reader.GetByte(reader.GetOrdinal("inventoryQuantity")),
+                                PhotoUrl = reader[reader.GetOrdinal("photoUrl")] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("photoUrl"))
+                        };
 
                             books.Add(book);
                         }
