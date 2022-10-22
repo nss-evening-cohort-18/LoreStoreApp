@@ -1,6 +1,6 @@
-﻿using backend.Models;
+﻿using LoreStoreAPI.Models;
 
-namespace backend.Repositories
+namespace LoreStoreAPI.Repositories
 {
     public interface IBookRepository
     {
