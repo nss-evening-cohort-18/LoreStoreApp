@@ -8,43 +8,40 @@ namespace LoreStoreAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookController : ControllerBase
+    public class OrderDetailController : ControllerBase
     {
-
-        private IBookRepository _bookData;
-        public BookController(IBookRepository bookData)
+        private IOrderDetailRepository _orderDetailData;
+        public OrderDetailController(IOrderDetailRepository orderDetailData)
         {
-            _bookData = bookData;
+            _orderDetailData = orderDetailData;
         }
-
-        // GET: api/<BookController>
+        // GET: api/<OrderDetailController>
         [HttpGet]
-        public List<Book> GetAllBooks()
+        public List<OrderDetail> Get()
         {
-            return _bookData.GetBooks();
-
+            return _orderDetailData.GetOrderDetails();
         }
 
-        // GET api/<BookController>/5
+        // GET api/<OrderDetailController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<BookController>
+        // POST api/<OrderDetailController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<BookController>/5
+        // PUT api/<OrderDetailController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<BookController>/5
+        // DELETE api/<OrderDetailController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
