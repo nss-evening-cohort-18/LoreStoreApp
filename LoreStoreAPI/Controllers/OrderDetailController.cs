@@ -1,6 +1,8 @@
 ﻿using LoreStoreAPI.Models;
 using LoreStoreAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,44 +19,99 @@ namespace LoreStoreAPI.Controllers
         }
         // GET: api/<OrderDetailController>
         [HttpGet]
-        public List<OrderDetail> Get()
+        public IActionResult GetAllOrderDetails()
         {
-            return _orderDetailData.GetOrderDetails();
+            List<OrderDetail> orderDetails = _orderDetailData.GetOrderDetails();
+            if(orderDetails.Count <= 0 || orderDetails is null)
+            {
+                return NotFound();
+            } 
+                return Ok(orderDetails);
         }
 
         // GET api/<OrderDetailController>/5
         [HttpGet("{id}")]
-        public OrderDetail Get(int id)
+        public IActionResult GetOrderDetailById(int id)
         {
-            return _orderDetailData.GetOrderDetailsById(id);
+            OrderDetail orderDetail = _orderDetailData.GetOrderDetailById(id);
+            if(orderDetail is null)
+            {
+                return NoContent();
+            }
+            return Ok(orderDetail);
         }
 
         // GET api/<OrderDetailController>/5
         [HttpGet("OrderId/{id}")]
-        public List<OrderDetail> GetByOrderId(int id)
+        public IActionResult GetOrderDetailByOrderId(int id)
         {
-            return _orderDetailData.GetOrderDetailsByOrderId(id);
+            List <OrderDetail> orderDetails = _orderDetailData.GetOrderDetailsByOrderId(id);
+            if( orderDetails.Count <= 0 || orderDetails is null)
+            {
+                return NoContent();
+            }
+            return Ok(orderDetails);
         }
 
         // POST api/<OrderDetailController>
         [HttpPost]
-        public void Post([FromBody] OrderDetail orderDetail)
+        public IActionResult PostNewOrderDetail([FromBody] OrderDetail orderDetail)
         {
+            List<string> errors = OrderDetail.OrderDetailValidator(orderDetail);
+            if (errors.Count > 0)
+            {
+                string errorString = "";
+                foreach (string error in errors)
+                {
+                    errorString += error + "\n";
+                }
+                return BadRequest(errorString);
+            }
+            else
+            {
             _orderDetailData.AddOrderDetail(orderDetail);
+            return Ok();
+            }
         }
 
         // PUT api/<OrderDetailController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] OrderDetail orderDetail)
+        public IActionResult UpdateOrderDetail(int id, [FromBody] OrderDetail orderDetail)
         {
-            _orderDetailData.UpdateOrderDetail(id, orderDetail);
+            List<string> errors = OrderDetail.OrderDetailValidator(orderDetail);
+            if(orderDetail == null || id <= 0 || errors.Count > 0)
+            {
+                string errorString = "";
+                foreach (string error in errors)
+                {
+                    errorString += error + "\n";
+                }
+                return BadRequest(errorString);
+            }
+
+            int orderToUpdate = _orderDetailData.UpdateOrderDetail(id, orderDetail);
+
+            if (orderToUpdate <=0)
+            {
+                return BadRequest("Order detail does not exist");
+            }
+           
+            return Ok();
         }
 
         // DELETE api/<OrderDetailController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult DeleteOredrDetail(int id)
         {
-            _orderDetailData.DeleteOrderDetail(id);
+            int orderToDelete = _orderDetailData.DeleteOrderDetail(id);
+
+            if (orderToDelete <= 0)
+            {
+                return BadRequest("Order detail does not exist");
+            }
+
+            
+            return Ok();
         }
     }
 }

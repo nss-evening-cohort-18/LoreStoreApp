@@ -52,7 +52,7 @@ namespace LoreStoreAPI.Repositories
             }
         }
 
-        public OrderDetail GetOrderDetailsById(int id)
+        public OrderDetail GetOrderDetailById(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -162,7 +162,7 @@ namespace LoreStoreAPI.Repositories
             }
         }
 
-        public void UpdateOrderDetail(int id, OrderDetail orderDetail)
+        public int UpdateOrderDetail(int id, OrderDetail orderDetail)
         {
             using (SqlConnection conn = Connection)
             {
@@ -185,12 +185,12 @@ namespace LoreStoreAPI.Repositories
                     cmd.Parameters.AddWithValue("@unitPrice", orderDetail.UnitPrice);
                     cmd.Parameters.AddWithValue("@id", id);
 
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public void DeleteOrderDetail(int orderDetailId)
+        public int DeleteOrderDetail(int orderDetailId)
         {
             using (SqlConnection conn = Connection)
             {
@@ -205,7 +205,7 @@ namespace LoreStoreAPI.Repositories
 
                     cmd.Parameters.AddWithValue("@id", orderDetailId);
 
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery();
                 }
             }
         }
