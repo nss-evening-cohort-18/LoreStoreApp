@@ -209,5 +209,25 @@ namespace LoreStoreAPI.Repositories
                 }
             }
         }
+
+        public int DeleteOrderDetailByOrderId(int orderId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE FROM OrderDetail
+                            WHERE orderId = @id
+                        ";
+
+                    cmd.Parameters.AddWithValue("@id", orderId);
+
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

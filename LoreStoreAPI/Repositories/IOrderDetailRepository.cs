@@ -10,5 +10,6 @@ namespace LoreStoreAPI.Repositories
         void AddOrderDetail(OrderDetail orderDetail);
         int UpdateOrderDetail(int id, OrderDetail orderDetail);
         int DeleteOrderDetail(int orderDetailId);
+        int DeleteOrderDetailByOrderId(int orderId);
     }
 }

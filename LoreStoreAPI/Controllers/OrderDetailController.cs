@@ -113,5 +113,20 @@ namespace LoreStoreAPI.Controllers
             
             return Ok();
         }
+
+        // DELETE api/<OrderDetailController>/5
+        [HttpDelete("OrderId/{id}")]
+        public IActionResult DeleteOredrDetailByOrderId(int id)
+        {
+            int orderToDelete = _orderDetailData.DeleteOrderDetailByOrderId(id);
+
+            if (orderToDelete <= 0)
+            {
+                return BadRequest("Order does not exist");
+            }
+
+
+            return Ok();
+        }
     }
 }
