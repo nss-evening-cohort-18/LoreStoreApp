@@ -8,5 +8,13 @@ namespace LoreStoreAPI.Repositories
     {
         List<Order> GetAllOrders();
         Order GetOrderById(int id);
+        List<Order> GetAllOrdersByUserId(int id);
+        List<Order> GetAllOrdersByOrderDate(DateTime dateTime);
+        List<Order> GetAllOrdersByIsComplete(Boolean isComplete);
+        List<Order> GetAllOrdersByStatus(string status);
+
+        void AddOrder(Order order);
+
+        int UpdateOrder(int id, Order order);
     }
 }
