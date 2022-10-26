@@ -1,4 +1,4 @@
-using backend.Repositories;
+using LoreStoreAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

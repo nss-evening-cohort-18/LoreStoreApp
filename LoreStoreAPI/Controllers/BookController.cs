@@ -1,10 +1,10 @@
-﻿using backend.Models;
-using backend.Repositories;
+﻿using LoreStoreAPI.Models;
+using LoreStoreAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace backend.Controllers
+namespace LoreStoreAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -27,15 +27,16 @@ namespace backend.Controllers
 
         // GET api/<BookController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Book GetIndividualBook(int id)
         {
-            return "value";
+            return _bookData.GetBookById(id);
         }
 
         // POST api/<BookController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Book book)
         {
+           _bookData.AddBook(book);
         }
 
         // PUT api/<BookController>/5
@@ -46,8 +47,11 @@ namespace backend.Controllers
 
         // DELETE api/<BookController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteIndividualBook(int id)
         {
+            int bookToDelete = _bookData.DeleteBook(id);
         }
+
+        
     }
 }
