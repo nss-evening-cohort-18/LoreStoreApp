@@ -1,10 +1,10 @@
-﻿using backend.Models;
-using backend.Repositories;
+﻿using LoreStoreAPI.Models;
+using LoreStoreAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace backend.Controllers
+namespace LoreStoreAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

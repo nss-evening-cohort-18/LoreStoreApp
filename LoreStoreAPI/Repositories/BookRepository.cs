@@ -1,7 +1,7 @@
-﻿using backend.Models;
+﻿using LoreStoreAPI.Models;
 using Microsoft.Data.SqlClient;
 
-namespace backend.Repositories
+namespace LoreStoreAPI.Repositories
 {
     public class BookRepository : IBookRepository
     {
@@ -51,7 +51,7 @@ namespace backend.Repositories
                                 Price = reader.GetDouble(reader.GetOrdinal("price")),
                                 InventoryQuantity = reader.GetByte(reader.GetOrdinal("inventoryQuantity")),
                                 PhotoUrl = reader[reader.GetOrdinal("photoUrl")] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("photoUrl"))
-                        };
+                            };
 
                             books.Add(book);
                         }
