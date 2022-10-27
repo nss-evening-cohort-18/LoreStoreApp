@@ -1,6 +1,8 @@
 ﻿using LoreStoreAPI.Models;
 using LoreStoreAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.Common;
+using System.Reflection.Metadata.Ecma335;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,34 +23,59 @@ namespace LoreStoreAPI.Controllers
 
         // GET: api/<UserController>
         [HttpGet]
-        public List<User> GetAllUsers()
+        public IActionResult  GetAllUsers()
         {
-            return _userRepo.GetUsers();
+            List<User> users = _userRepo.GetUsers();
+
+            return Ok(users);
         }
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult GetUserById(int id)
         {
-            return "value";
+            User user = _userRepo.GetUserById(id);
+
+            if (user == null)
+            {
+                return NoContent();
+            }
+            return Ok(user); 
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult AddUser([FromBody] User user)
         {
+            _userRepo.AddUser(user);
+
+            return Ok();
+
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult UpdateUser(int id,[FromBody] User user)
         {
+             _userRepo.UpdateUser(id, user);
+
+            if (user == null)
+            {
+                return NoContent();
+            }
+
+            return Ok();
+
+
         }
 
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult DeleteUser(int id)
         {
+            _userRepo.DeleteUser(id);
+
+            return Ok();
         }
     }
 }
