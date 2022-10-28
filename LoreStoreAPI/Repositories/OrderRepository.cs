@@ -298,14 +298,14 @@ namespace LoreStoreAPI.Repositories
                     cmd.CommandText = @"
                                         INSERT INTO [dbo].[Order] (UserId, PaymentMethodId, Total, OrderDate, isComplete, [Status])
                                         OUTPUT INSERTED.ID
-                                        VALUES (@UserId, @PaymentMethodId, @Total, @OrderDate, @isComplete, @[Status])
+                                        VALUES (@UserId, @PaymentMethodId, @Total, @OrderDate, @isComplete, @Status)
                                         ";
                     cmd.Parameters.AddWithValue("@UserId", order.UserId);
                     cmd.Parameters.AddWithValue("@PaymentMethodId", order.PaymentMethodId);
                     cmd.Parameters.AddWithValue("@Total", order.Total);
                     cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
                     cmd.Parameters.AddWithValue("@isComplete", order.IsComplete);
-                    cmd.Parameters.AddWithValue("@[Status]", order.Status);
+                    cmd.Parameters.AddWithValue("@Status", order.Status);
 
                     int id = (int)cmd.ExecuteScalar();
                     order.Id = id;
@@ -328,7 +328,7 @@ namespace LoreStoreAPI.Repositories
                                             Total = @Total, 
                                             OrderDate = @OrderDate, 
                                             isComplete = @isComplete, 
-                                            [Status] = @[Status]
+                                            [Status] = @Status
                                         WHERE Id = @id
                                         ";
                     cmd.Parameters.AddWithValue("@UserId", order.UserId);
@@ -336,7 +336,7 @@ namespace LoreStoreAPI.Repositories
                     cmd.Parameters.AddWithValue("@Total", order.Total);
                     cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
                     cmd.Parameters.AddWithValue("@isComplete", order.IsComplete);
-                    cmd.Parameters.AddWithValue("@[Status]", order.Status);
+                    cmd.Parameters.AddWithValue("@Status", order.Status);
                     cmd.Parameters.AddWithValue("@id", id);
 
                     return cmd.ExecuteNonQuery();
