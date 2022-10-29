@@ -62,7 +62,7 @@ namespace LoreStoreAPI.Repositories
             }
         }
 
-        public Book GetBookById(int id)
+        public List<Book> GetBookById(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -88,6 +88,7 @@ namespace LoreStoreAPI.Repositories
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
+                        List<Book> resultBooks = new List<Book>();
                         if (reader.Read())
                         {
                             Book book = new Book()
@@ -106,7 +107,9 @@ namespace LoreStoreAPI.Repositories
 
                             };
 
-                            return book;
+                            resultBooks.Add(book);
+
+                            return resultBooks;
                         } else
                         {
                             return null;
@@ -158,6 +161,45 @@ namespace LoreStoreAPI.Repositories
                                     WHERE id = @id
                                         ";
                     cmd.Parameters.AddWithValue("@id", id);
+
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public int UpdateBook(int Id, Book book)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                        UPDATE [dbo].[book]
+                                        SET
+                                            Title = @Title,
+                                            AuthorFirstName = @authorFirstName,
+                                            AuthorLastName = @authorLastName,
+                                            DatePublished = @datePublished,
+                                            Description = @description,
+                                            IsFiction = @isFiction,
+                                            SubGenre = @subGenre,
+                                            Price = @price,
+                                            InventoryQuantity = @inventoryQuantity,
+                                            PhotoURl = @photoUrl
+                                        WHERE Id = @id
+                                        ";
+                    cmd.Parameters.AddWithValue("@id", Id);
+                    cmd.Parameters.AddWithValue("@title", book.Title);
+                    cmd.Parameters.AddWithValue("@authorFirstName", book.AuthorLastName);
+                    cmd.Parameters.AddWithValue("@authorLastName", book.AuthorFirstName);
+                    cmd.Parameters.AddWithValue("@datePublished", book.DatePublished);
+                    cmd.Parameters.AddWithValue("@description", book.Description);
+                    cmd.Parameters.AddWithValue("@isFiction", book.IsFiction);
+                    cmd.Parameters.AddWithValue("@subGenre", book.SubGenre);
+                    cmd.Parameters.AddWithValue("@price", book.Price);
+                    cmd.Parameters.AddWithValue("@inventoryQuantity", book.InventoryQuantity);
+                    cmd.Parameters.AddWithValue("@photoUrl", book.PhotoUrl);
 
                     return cmd.ExecuteNonQuery();
                 }

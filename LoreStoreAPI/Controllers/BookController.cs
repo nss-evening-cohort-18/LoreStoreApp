@@ -19,37 +19,78 @@ namespace LoreStoreAPI.Controllers
 
         // GET: api/<BookController>
         [HttpGet]
-        public List<Book> GetAllBooks()
+        public IActionResult GetAllBooks()
         {
-            return _bookData.GetBooks();
+            List<Book> bookList = _bookData.GetBooks();
 
+            if (bookList.Count <= 0 || bookList == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(bookList);
         }
 
         // GET api/<BookController>/5
         [HttpGet("{id}")]
-        public Book GetIndividualBook(int id)
+        public IActionResult GetIndividualBook(int id)
         {
-            return _bookData.GetBookById(id);
+            List<Book> resultBook = _bookData.GetBookById(id);
+
+            if (resultBook.Count == 0 || resultBook.Count > 1)
+            {
+                return BadRequest("Book could not be found");
+            }
+            return Ok(resultBook);
+
         }
 
         // POST api/<BookController>
         [HttpPost]
-        public void Post([FromBody] Book book)
+        public IActionResult Post([FromBody] Book book)
         {
-           _bookData.AddBook(book);
+            List<string> errors = Book.BookValidator(book);
+            if(errors.Count > 0)
+            {
+                string errorString = "";
+                foreach(string error in errors)
+                {
+                    errorString += error + "\n";
+                }
+                return BadRequest(errorString);
+            } else
+            {
+                _bookData.AddBook(book);
+                return Ok();
+            }
         }
 
         // PUT api/<BookController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult updateIndividualBook(int id, [FromBody] Book book)
         {
+            int bookToUpdate = _bookData.UpdateBook(id, book);
+
+            if (bookToUpdate <= 0)
+            {
+                return BadRequest("Book does not exist");
+            }
+
+            return Ok();
         }
 
         // DELETE api/<BookController>/5
         [HttpDelete("{id}")]
-        public void DeleteIndividualBook(int id)
+        public IActionResult DeleteIndividualBook(int id)
         {
             int bookToDelete = _bookData.DeleteBook(id);
+            if (bookToDelete <= 0)
+            {
+                return BadRequest("Book does not exist");
+            }
+
+            return Ok();
+
         }
 
         
