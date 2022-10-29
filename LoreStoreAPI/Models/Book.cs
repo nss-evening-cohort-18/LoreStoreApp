@@ -1,4 +1,4 @@
-﻿namespace backend.Models
+﻿namespace LoreStoreAPI.Models
 {
     public class Book
     {
