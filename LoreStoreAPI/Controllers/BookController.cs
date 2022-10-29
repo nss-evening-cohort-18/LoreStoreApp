@@ -11,7 +11,7 @@ namespace LoreStoreAPI.Controllers
     public class BookController : ControllerBase
     {
 
-        private IBookRepository _bookData;
+        private readonly IBookRepository _bookData;
         public BookController(IBookRepository bookData)
         {
             _bookData = bookData;
