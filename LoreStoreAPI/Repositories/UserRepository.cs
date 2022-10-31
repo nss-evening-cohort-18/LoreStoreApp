@@ -38,7 +38,7 @@ namespace LoreStoreAPI.Repositories
 											   city, 
 											   [state], 
 											   zip, 
-											   isAdmin
+											   UserTypeId
 										  FROM [dbo].[User]
 									  ";
 					using (SqlDataReader reader = cmd.ExecuteReader())
@@ -58,7 +58,7 @@ namespace LoreStoreAPI.Repositories
 								City = reader.GetString(reader.GetOrdinal("city")),
 								State = reader.GetString(reader.GetOrdinal("state")),
 								Zip = reader.GetString(reader.GetOrdinal("zip")),
-								IsAdmin = reader.GetBoolean(reader.GetOrdinal("isAdmin"))
+								UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId"))
 
 							};
 							users.Add(user);
@@ -87,7 +87,7 @@ namespace LoreStoreAPI.Repositories
 								   city, 
 								   [state], 
 								   zip, 
-								   isAdmin
+								   UserTypeId
 							  FROM [dbo].[User]
 							  WHERE id = @id
 						  ";
@@ -111,7 +111,7 @@ namespace LoreStoreAPI.Repositories
 								City = reader.GetString(reader.GetOrdinal("city")),
 								State = reader.GetString(reader.GetOrdinal("state")),
 								Zip = reader.GetString(reader.GetOrdinal("zip")),
-								IsAdmin = reader.GetBoolean(reader.GetOrdinal("isAdmin"))
+								UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId"))
 
 							};
 							return user;
@@ -144,9 +144,9 @@ namespace LoreStoreAPI.Repositories
 															city, 
 															[state], 
 															zip, 
-															isAdmin)
+															UserTypeId)
 											OUTPUT INSERTED.ID
-											VALUES (@email, @firstName, @lastName, @username, @address1, @address2, @city, @state, @zip, @isAdmin)
+											VALUES (@email, @firstName, @lastName, @username, @address1, @address2, @city, @state, @zip, @UserTypeId)
 											";
 
 						
@@ -159,7 +159,7 @@ namespace LoreStoreAPI.Repositories
 							cmd.Parameters.AddWithValue("@city", user.City );
 							cmd.Parameters.AddWithValue("@state", user.State );
 							cmd.Parameters.AddWithValue("@zip", user.Zip );
-							cmd.Parameters.AddWithValue("@isAdmin", user.IsAdmin );
+							cmd.Parameters.AddWithValue("@UserTypeId", user.UserTypeId );
 
 							int id = (int)cmd.ExecuteScalar();
 
@@ -187,7 +187,7 @@ namespace LoreStoreAPI.Repositories
 											city = @city,
 											[state] = @state,
 											zip = @zip,
-											isAdmin = @isAdmin
+											UserTypeId = @UserTypeId
 								
 										WHERE Id = @id
 										";
@@ -202,7 +202,7 @@ namespace LoreStoreAPI.Repositories
 					cmd.Parameters.AddWithValue("@city", user.City);
 					cmd.Parameters.AddWithValue("@state", user.State);
 					cmd.Parameters.AddWithValue("@zip", user.Zip);
-					cmd.Parameters.AddWithValue("@isAdmin", user.IsAdmin);
+					cmd.Parameters.AddWithValue("@UserTypeId", user.UserTypeId);
 
 					cmd.ExecuteNonQuery();
 				}

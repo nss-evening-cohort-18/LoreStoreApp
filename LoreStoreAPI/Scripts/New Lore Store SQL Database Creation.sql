@@ -31,12 +31,12 @@ CREATE TABLE [dbo].[User] (
   [city] varchar(40),
   [state] varchar(2),
   [zip] varchar(10),
-  [UserType] varchar(28)
+  [UserTypeId] int
 )
 GO
 
 CREATE TABLE [dbo].[UserType] (
-  [id] int Primary KEY IDENTITY(1, 1),
+  [UserTypeId] int Primary KEY IDENTITY(1, 1),
   [Name] varchar(28)
   )
 GO
@@ -89,7 +89,7 @@ GO
 INSERT INTO [dbo].[OrderDetail] ([orderId], [bookId], [quantity], [unitPrice]) VALUES ('1', '1', '2', '21.99')
 GO
 --table data for users
-INSERT INTO [dbo].[User] ([firebaseId], [email], [firstName], [lastName], [username], [address1], [address2], [city], [state], [zip], [UserType])  VALUES ('zfgWNVzxEVbRMhYsRkdLSul0RJR2','testUser@mail.com', 'John', 'Test', 'JohnnyTester', '123 Testing Rd', 'Apt 101', 'Nashville', 'TN', '37211', 'Admin')
+INSERT INTO [dbo].[User] ([firebaseId], [email], [firstName], [lastName], [username], [address1], [address2], [city], [state], [zip], [UserTypeId])  VALUES ('zfgWNVzxEVbRMhYsRkdLSul0RJR2','testUser@mail.com', 'John', 'Test', 'JohnnyTester', '123 Testing Rd', 'Apt 101', 'Nashville', 'TN', '37211', '2')
 GO
 
 INSERT INTO [dbo].[Book] ([title], [authorLastName], [authorFirstName], [datePublished], [description], [isFiction], [subGenre], [price], [inventoryQuantity], [photoUrl]) VALUES (N'Flatland: A Romance of Many Dimensions', N'Abbott', N'Edwin Abbott', N'1994-01-01', N'Fourth dimension', 0, N'Biography & Memoir', 81, 18, NULL)
