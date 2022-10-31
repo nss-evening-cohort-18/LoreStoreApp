@@ -43,7 +43,6 @@ namespace LoreStoreAPI.Controllers
             return Ok(user); 
         }
 
-        // POST api/<UserController>
         [HttpPost]
         public IActionResult AddUser([FromBody] User user)
         {

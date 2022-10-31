@@ -1,5 +1,6 @@
 ﻿using LoreStoreAPI.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System.ComponentModel.DataAnnotations;
 
 namespace LoreStoreAPI.Repositories
@@ -28,19 +29,23 @@ namespace LoreStoreAPI.Repositories
 				conn.Open();
 				using (SqlCommand cmd = conn.CreateCommand())
 				{
-					cmd.CommandText = @"SELECT id, 
-											   email, 
-											   firstName, 
-											   lastName, 
-											   username, 
-											   address1, 
-											   address2, 
-											   city, 
-											   [state], 
-											   zip, 
-											   UserTypeId
-										  FROM [dbo].[User]
+					cmd.CommandText = @"SELECT  u.id, 
+												u.firebaseId, 
+												u.email, 
+												u.firstName, 
+												u.LastName, 
+												u.username, 
+												u.address1, 
+												u.address2,
+												u.city,
+												u.[state],
+												u.zip,
+												ut.UserTypeId,
+												ut.[Name] AS UserTypeName
+										FROM [dbo].[User] u
+										LEFT JOIN [dbo].[UserType] ut ON ut.UserTypeId = u.UserTypeId
 									  ";
+
 					using (SqlDataReader reader = cmd.ExecuteReader())
 					{
 						List<User> users = new List<User>();
@@ -49,6 +54,7 @@ namespace LoreStoreAPI.Repositories
 							User user = new User()
 							{
 								Id = reader.GetInt32(reader.GetOrdinal("id")),
+								FirebaseUserId = reader.GetString(reader.GetOrdinal("firebaseId")),
 								Email = reader.GetString(reader.GetOrdinal("email")),
 								FirstName = reader.GetString(reader.GetOrdinal("firstName")),
 								LastName = reader.GetString(reader.GetOrdinal("lastName")),
@@ -58,7 +64,12 @@ namespace LoreStoreAPI.Repositories
 								City = reader.GetString(reader.GetOrdinal("city")),
 								State = reader.GetString(reader.GetOrdinal("state")),
 								Zip = reader.GetString(reader.GetOrdinal("zip")),
-								UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId"))
+								UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+								UserType = new UserType()
+								{
+									Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+									Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
+								}
 
 							};
 							users.Add(user);
@@ -77,20 +88,23 @@ namespace LoreStoreAPI.Repositories
 				conn.Open();
 				using (SqlCommand cmd = conn.CreateCommand())
 				{
-					cmd.CommandText = @"SELECT id, 
-								   email, 
-								   firstName, 
-								   lastName, 
-								   username, 
-								   address1, 
-								   address2, 
-								   city, 
-								   [state], 
-								   zip, 
-								   UserTypeId
-							  FROM [dbo].[User]
-							  WHERE id = @id
-						  ";
+					cmd.CommandText = @"SELECT  u.id, 
+												u.firebaseId, 
+												u.email, 
+												u.firstName, 
+												u.LastName, 
+												u.username, 
+												u.address1, 
+												u.address2,
+												u.city,
+												u.[state],
+												u.zip,
+												ut.UserTypeId,
+												ut.[Name] AS UserTypeName
+										FROM [dbo].[User] u
+										LEFT JOIN [dbo].[UserType] ut ON ut.UserTypeId = u.UserTypeId
+										WHERE u.id = @id
+									  ";
 
 					cmd.Parameters.AddWithValue("@id", id);
 
@@ -102,6 +116,7 @@ namespace LoreStoreAPI.Repositories
 							User user = new User()
 							{
 								Id = reader.GetInt32(reader.GetOrdinal("id")),
+								FirebaseUserId = reader.GetString(reader.GetOrdinal("firebaseId")),
 								Email = reader.GetString(reader.GetOrdinal("email")),
 								FirstName = reader.GetString(reader.GetOrdinal("firstName")),
 								LastName = reader.GetString(reader.GetOrdinal("lastName")),
@@ -111,8 +126,77 @@ namespace LoreStoreAPI.Repositories
 								City = reader.GetString(reader.GetOrdinal("city")),
 								State = reader.GetString(reader.GetOrdinal("state")),
 								Zip = reader.GetString(reader.GetOrdinal("zip")),
-								UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId"))
+								UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+								UserType = new UserType()
+								{
+									Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+									Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
+								}
+							};
+							return user;
+						}
+						else
+						{
+							return null;
+						}
+					}
 
+				}
+			}
+		}
+
+
+		public User GetUserByFirebaseId(string firebaseUserId)
+		{
+			using (SqlConnection conn = Connection)
+			{
+				conn.Open();
+				using (SqlCommand cmd = conn.CreateCommand())
+				{
+					cmd.CommandText = @"SELECT  u.id, 
+												u.firebaseId, 
+												u.email, 
+												u.firstName, 
+												u.LastName, 
+												u.username, 
+												u.address1, 
+												u.address2,
+												u.city,
+												u.[state],
+												u.zip,
+												ut.UserTypeId,
+												ut.[Name] AS UserTypeName
+								FROM [dbo].[User] u
+								LEFT JOIN [dbo].[UserType] ut ON ut.UserTypeId = u.UserTypeId
+								WHERE u.firebaseId = @FirebaseUserId
+							  ";
+
+
+					cmd.Parameters.AddWithValue("@FirebaseUserId", firebaseUserId);
+
+					using (SqlDataReader reader = cmd.ExecuteReader())
+					{
+						if (reader.Read())
+						{
+							User user = new User()
+							{
+								Id = reader.GetInt32(reader.GetOrdinal("id")),
+								FirebaseUserId = reader.GetString(reader.GetOrdinal("firebaseId")),
+								Email = reader.GetString(reader.GetOrdinal("email")),
+								FirstName = reader.GetString(reader.GetOrdinal("firstName")),
+								LastName = reader.GetString(reader.GetOrdinal("lastName")),
+								Username = reader.GetString(reader.GetOrdinal("username")),
+								Address1 = reader.GetString(reader.GetOrdinal("address1")),
+								Address2 = reader.GetString(reader.GetOrdinal("address2")),
+								City = reader.GetString(reader.GetOrdinal("city")),
+								State = reader.GetString(reader.GetOrdinal("state")),
+								Zip = reader.GetString(reader.GetOrdinal("zip")),
+								UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+								UserType = new UserType()
+								{
+									Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+									Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
+								}
 							};
 							return user;
 						}
@@ -135,7 +219,8 @@ namespace LoreStoreAPI.Repositories
 					{
 						cmd.CommandText = @"
 											INSERT INTO [dbo].[User] 
-															(email, 
+															(firebaseId,
+															email, 
 															firstName, 
 															lastName, 
 															username, 
@@ -146,10 +231,10 @@ namespace LoreStoreAPI.Repositories
 															zip, 
 															UserTypeId)
 											OUTPUT INSERTED.ID
-											VALUES (@email, @firstName, @lastName, @username, @address1, @address2, @city, @state, @zip, @UserTypeId)
+											VALUES (@firebaseId, @email, @firstName, @lastName, @username, @address1, @address2, @city, @state, @zip, @UserTypeId)
 											";
 
-						
+							cmd.Parameters.AddWithValue("@firebaseId", user.FirebaseUserId);
 							cmd.Parameters.AddWithValue("@email", user.Email );
 							cmd.Parameters.AddWithValue("@firstName", user.FirstName );
 							cmd.Parameters.AddWithValue("@lastName", user.LastName );

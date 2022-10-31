@@ -8,6 +8,8 @@ namespace LoreStoreAPI.Repositories
 
         User GetUserById(int id);
 
+        User GetUserByFirebaseId(string firebaseUserId);
+
         public void AddUser(User user);
 
         public void DeleteUser(int id);
