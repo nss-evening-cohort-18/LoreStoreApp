@@ -1,7 +1,30 @@
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 using LoreStoreAPI.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
-
+FirebaseApp.Create(new AppOptions
+{
+    Credential = GoogleCredential.FromFile(builder.Configuration.GetValue<string>("GoogleCredentialPath"))
+}) ;
+var firebaseProjectId = builder.Configuration.GetValue<string>("FirebaseProjectId");
+var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = googleTokenUrl;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = googleTokenUrl,
+            ValidateAudience = true,
+            ValidAudience = firebaseProjectId,
+            ValidateLifetime = true
+        };
+    });
 // Add services to the container.
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<IPaymentMethodRepository, PaymentMethodRepository>();
@@ -23,7 +46,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
