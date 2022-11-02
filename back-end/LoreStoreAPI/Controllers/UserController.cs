@@ -1,5 +1,6 @@
 ﻿using LoreStoreAPI.Models;
 using LoreStoreAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.Common;
 using System.Reflection.Metadata.Ecma335;
@@ -8,6 +9,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace LoreStoreAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase

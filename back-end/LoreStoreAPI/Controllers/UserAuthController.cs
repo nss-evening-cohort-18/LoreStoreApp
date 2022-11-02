@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace LoreStoreAPI.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserAuthController : ControllerBase
