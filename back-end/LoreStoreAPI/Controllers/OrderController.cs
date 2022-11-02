@@ -1,5 +1,6 @@
 ﻿using LoreStoreAPI.Models;
 using LoreStoreAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Net;
@@ -8,6 +9,7 @@ using System.Net;
 
 namespace LoreStoreAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
