@@ -1,7 +1,7 @@
 import React from 'react';
-import { signIn } from '../utils/auth';
+import { signIn } from '../../utils/auth';
 
-export default function LogIn() {
+export default function Login() {
   return (
     <div className="text-center mt-5">
       <h1>Welcome! Sign In!</h1>
