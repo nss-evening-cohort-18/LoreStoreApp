@@ -4,6 +4,7 @@ using LoreStoreAPI.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
+var LoreStoreApp = "_loreStoreApp";
 var builder = WebApplication.CreateBuilder(args);
 FirebaseApp.Create(new AppOptions
 {
@@ -25,6 +26,19 @@ builder.Services
             ValidateLifetime = true
         };
     });
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: LoreStoreApp,
+                      policy =>
+                      {
+                          policy.WithOrigins(builder.Configuration.GetValue<string>("BackendPort"),
+                                              builder.Configuration.GetValue<string>("FrontendPort"))
+                                .AllowAnyHeader()
+                                .WithMethods("GEt", "POST", "PUT", "DELETE")
+                                .WithExposedHeaders("*");
+                      });
+});
 // Add services to the container.
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<IPaymentMethodRepository, PaymentMethodRepository>();
@@ -45,6 +59,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(LoreStoreApp);
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
