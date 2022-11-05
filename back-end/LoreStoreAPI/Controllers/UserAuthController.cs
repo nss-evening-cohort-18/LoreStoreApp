@@ -2,11 +2,11 @@
 using LoreStoreAPI.Models;
 using LoreStoreAPI.Repositories;
 using Microsoft.AspNetCore.Authorization;
-
+using FirebaseAdmin.Auth;
 
 namespace LoreStoreAPI.Controllers
 {
-    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class UserAuthController : ControllerBase
@@ -20,13 +20,21 @@ namespace LoreStoreAPI.Controllers
         }
 
         [HttpGet("{firebaseUserId}")]
-        public IActionResult GetUserByFirebaseId(string firebaseUserId)
+        public async Task<IActionResult> EnsureUserExists(string firebaseUserId)
         {
             User user = _userRepo.GetUserByFirebaseId(firebaseUserId);
 
+            var FbUser = await FirebaseAuth.DefaultInstance.GetUserAsync(firebaseUserId);
             if (user == null)
             {
-                return NoContent();
+                User newUser = new()
+                {
+                    FirebaseUserId = firebaseUserId,
+                    Email = FbUser.Email,
+                    UserTypeId = 1
+                };
+                _userRepo.AddUser(newUser);
+                return Ok(newUser);
             }
             return Ok(user);
         }

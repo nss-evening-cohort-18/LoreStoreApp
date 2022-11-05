@@ -1,7 +1,5 @@
 ﻿using LoreStoreAPI.Models;
 using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-using System.ComponentModel.DataAnnotations;
 
 namespace LoreStoreAPI.Repositories
 {
@@ -33,7 +31,7 @@ namespace LoreStoreAPI.Repositories
 												u.firebaseId, 
 												u.email, 
 												u.firstName, 
-												u.LastName, 
+												u.lastName, 
 												u.username, 
 												u.address1, 
 												u.address2,
@@ -56,14 +54,14 @@ namespace LoreStoreAPI.Repositories
 								Id = reader.GetInt32(reader.GetOrdinal("id")),
 								FirebaseUserId = reader.GetString(reader.GetOrdinal("firebaseId")),
 								Email = reader.GetString(reader.GetOrdinal("email")),
-								FirstName = reader.GetString(reader.GetOrdinal("firstName")),
-								LastName = reader.GetString(reader.GetOrdinal("lastName")),
-								Username = reader.GetString(reader.GetOrdinal("username")),
-								Address1 = reader.GetString(reader.GetOrdinal("address1")),
-								Address2 = reader.GetString(reader.GetOrdinal("address2")),
-								City = reader.GetString(reader.GetOrdinal("city")),
-								State = reader.GetString(reader.GetOrdinal("state")),
-								Zip = reader.GetString(reader.GetOrdinal("zip")),
+								FirstName = reader[(reader.GetOrdinal("firstName"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("firstName")),
+								LastName = reader[(reader.GetOrdinal("lastName"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("lastName")),
+								Username = reader[(reader.GetOrdinal("username"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("username")),
+								Address1 = reader[(reader.GetOrdinal("address1"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("address1")),
+								Address2 = reader[(reader.GetOrdinal("address2"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("address2")),
+								City = reader[(reader.GetOrdinal("city"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("city")),
+								State = reader[(reader.GetOrdinal("state"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("state")),
+								Zip = reader[(reader.GetOrdinal("zip"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("zip")),
 								UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
 								UserType = new UserType()
 								{
@@ -76,7 +74,7 @@ namespace LoreStoreAPI.Repositories
 						}
 						return users;
 					}
-										
+
 				}
 			}
 		}
@@ -92,7 +90,7 @@ namespace LoreStoreAPI.Repositories
 												u.firebaseId, 
 												u.email, 
 												u.firstName, 
-												u.LastName, 
+												u.lastName, 
 												u.username, 
 												u.address1, 
 												u.address2,
@@ -115,24 +113,24 @@ namespace LoreStoreAPI.Repositories
 						{
 							User user = new User()
 							{
-								Id = reader.GetInt32(reader.GetOrdinal("id")),
-								FirebaseUserId = reader.GetString(reader.GetOrdinal("firebaseId")),
-								Email = reader.GetString(reader.GetOrdinal("email")),
-								FirstName = reader.GetString(reader.GetOrdinal("firstName")),
-								LastName = reader.GetString(reader.GetOrdinal("lastName")),
-								Username = reader.GetString(reader.GetOrdinal("username")),
-								Address1 = reader.GetString(reader.GetOrdinal("address1")),
-								Address2 = reader.GetString(reader.GetOrdinal("address2")),
-								City = reader.GetString(reader.GetOrdinal("city")),
-								State = reader.GetString(reader.GetOrdinal("state")),
-								Zip = reader.GetString(reader.GetOrdinal("zip")),
-								UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
-								UserType = new UserType()
-								{
-									Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
-									Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
-								}
-							};
+                                Id = reader.GetInt32(reader.GetOrdinal("id")),
+                                FirebaseUserId = reader.GetString(reader.GetOrdinal("firebaseId")),
+                                Email = reader.GetString(reader.GetOrdinal("email")),
+                                FirstName = reader[(reader.GetOrdinal("firstName"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("firstName")),
+                                LastName = reader[(reader.GetOrdinal("lastName"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("lastName")),
+                                Username = reader[(reader.GetOrdinal("username"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("username")),
+                                Address1 = reader[(reader.GetOrdinal("address1"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("address1")),
+                                Address2 = reader[(reader.GetOrdinal("address2"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("address2")),
+                                City = reader[(reader.GetOrdinal("city"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("city")),
+                                State = reader[(reader.GetOrdinal("state"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("state")),
+                                Zip = reader[(reader.GetOrdinal("zip"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("zip")),
+                                UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                                UserType = new UserType()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                                    Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
+                                }
+                            };
 							return user;
 						}
 						else
@@ -157,7 +155,7 @@ namespace LoreStoreAPI.Repositories
 												u.firebaseId, 
 												u.email, 
 												u.firstName, 
-												u.LastName, 
+												u.lastName, 
 												u.username, 
 												u.address1, 
 												u.address2,
@@ -180,24 +178,24 @@ namespace LoreStoreAPI.Repositories
 						{
 							User user = new User()
 							{
-								Id = reader.GetInt32(reader.GetOrdinal("id")),
-								FirebaseUserId = reader.GetString(reader.GetOrdinal("firebaseId")),
-								Email = reader.GetString(reader.GetOrdinal("email")),
-								FirstName = reader.GetString(reader.GetOrdinal("firstName")),
-								LastName = reader.GetString(reader.GetOrdinal("lastName")),
-								Username = reader.GetString(reader.GetOrdinal("username")),
-								Address1 = reader.GetString(reader.GetOrdinal("address1")),
-								Address2 = reader.GetString(reader.GetOrdinal("address2")),
-								City = reader.GetString(reader.GetOrdinal("city")),
-								State = reader.GetString(reader.GetOrdinal("state")),
-								Zip = reader.GetString(reader.GetOrdinal("zip")),
-								UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
-								UserType = new UserType()
-								{
-									Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
-									Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
-								}
-							};
+                                Id = reader.GetInt32(reader.GetOrdinal("id")),
+                                FirebaseUserId = reader.GetString(reader.GetOrdinal("firebaseId")),
+                                Email = reader.GetString(reader.GetOrdinal("email")),
+                                FirstName = reader[(reader.GetOrdinal("firstName"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("firstName")),
+                                LastName = reader[(reader.GetOrdinal("lastName"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("lastName")),
+                                Username = reader[(reader.GetOrdinal("username"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("username")),
+                                Address1 = reader[(reader.GetOrdinal("address1"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("address1")),
+                                Address2 = reader[(reader.GetOrdinal("address2"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("address2")),
+                                City = reader[(reader.GetOrdinal("city"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("city")),
+                                State = reader[(reader.GetOrdinal("state"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("state")),
+                                Zip = reader[(reader.GetOrdinal("zip"))] == DBNull.Value ? null : reader.GetString(reader.GetOrdinal("zip")),
+                                UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                                UserType = new UserType()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                                    Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
+                                }
+                            };
 							return user;
 						}
 						else
@@ -212,12 +210,12 @@ namespace LoreStoreAPI.Repositories
 
 		public void AddUser(User user)
 		{
-				using (SqlConnection conn = Connection)
+			using (SqlConnection conn = Connection)
+			{
+				conn.Open();
+				using (SqlCommand cmd = conn.CreateCommand())
 				{
-					conn.Open();
-					using (SqlCommand cmd = conn.CreateCommand())
-					{
-						cmd.CommandText = @"
+					cmd.CommandText = @"
 											INSERT INTO [dbo].[User] 
 															(firebaseId,
 															email, 
@@ -234,24 +232,24 @@ namespace LoreStoreAPI.Repositories
 											VALUES (@firebaseId, @email, @firstName, @lastName, @username, @address1, @address2, @city, @state, @zip, @UserTypeId)
 											";
 
-							cmd.Parameters.AddWithValue("@firebaseId", user.FirebaseUserId);
-							cmd.Parameters.AddWithValue("@email", user.Email );
-							cmd.Parameters.AddWithValue("@firstName", user.FirstName );
-							cmd.Parameters.AddWithValue("@lastName", user.LastName );
-							cmd.Parameters.AddWithValue("@username", user.Username );
-							cmd.Parameters.AddWithValue("@address1", user.Address1 );
-							cmd.Parameters.AddWithValue("@address2", user.Address2 );
-							cmd.Parameters.AddWithValue("@city", user.City );
-							cmd.Parameters.AddWithValue("@state", user.State );
-							cmd.Parameters.AddWithValue("@zip", user.Zip );
-							cmd.Parameters.AddWithValue("@UserTypeId", user.UserTypeId );
+					cmd.Parameters.AddWithValue("@firebaseId", user.FirebaseUserId);
+					cmd.Parameters.AddWithValue("@email", user.Email);
+					cmd.Parameters.AddWithValue("@firstName", user.FirstName != null ? user.FirstName : DBNull.Value);
+					cmd.Parameters.AddWithValue("@lastName", user.LastName != null ? user.LastName : DBNull.Value);
+					cmd.Parameters.AddWithValue("@username", user.Username != null ? user.Username : DBNull.Value);
+					cmd.Parameters.AddWithValue("@address1", user.Address1 != null ? user.Address1 : DBNull.Value);
+					cmd.Parameters.AddWithValue("@address2", user.Address2 != null ? user.Address2 : DBNull.Value);
+					cmd.Parameters.AddWithValue("@city", user.City != null ? user.City : DBNull.Value);
+					cmd.Parameters.AddWithValue("@state", user.State != null ? user.State : DBNull.Value);
+					cmd.Parameters.AddWithValue("@zip", user.Zip != null ? user.Zip : DBNull.Value);
+					cmd.Parameters.AddWithValue("@UserTypeId", user.UserTypeId);
 
-							int id = (int)cmd.ExecuteScalar();
+					int id = (int)cmd.ExecuteScalar();
 
-							user.Id = id;
-					}
-				 }
-		 
+					user.Id = id;
+				}
+			}
+
 		}
 
 		public void UpdateUser(int id, User user)
@@ -279,20 +277,20 @@ namespace LoreStoreAPI.Repositories
 					cmd.Parameters.AddWithValue("@id", id);
 
 					cmd.Parameters.AddWithValue("@email", user.Email);
-					cmd.Parameters.AddWithValue("@firstName", user.FirstName);
-					cmd.Parameters.AddWithValue("@lastName", user.LastName);
-					cmd.Parameters.AddWithValue("@username", user.Username);
-					cmd.Parameters.AddWithValue("@address1", user.Address1);
-					cmd.Parameters.AddWithValue("@address2", user.Address2);
-					cmd.Parameters.AddWithValue("@city", user.City);
-					cmd.Parameters.AddWithValue("@state", user.State);
-					cmd.Parameters.AddWithValue("@zip", user.Zip);
-					cmd.Parameters.AddWithValue("@UserTypeId", user.UserTypeId);
+                    cmd.Parameters.AddWithValue("@firstName", user.FirstName != null ? user.FirstName : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@lastName", user.LastName != null ? user.LastName : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@username", user.Username != null ? user.Username : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@address1", user.Address1 != null ? user.Address1 : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@address2", user.Address2 != null ? user.Address2 : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@city", user.City != null ? user.City : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@state", user.State != null ? user.State : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@zip", user.Zip != null ? user.Zip : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@UserTypeId", user.UserTypeId);
 
 					cmd.ExecuteNonQuery();
 				}
 			}
-		} 
+		}
 
 		public void DeleteUser(int id)
 		{
