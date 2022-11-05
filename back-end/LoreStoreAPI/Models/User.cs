@@ -14,11 +14,11 @@ namespace LoreStoreAPI.Models
         [MaxLength(255)]
         public string Email { get; set; }
 
-        [Required]
+        
         [MaxLength(28)]
         public string FirstName { get; set; }
 
-        [Required]
+        
         [MaxLength(28)]
         public string LastName { get; set; }
 
