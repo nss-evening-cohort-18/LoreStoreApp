@@ -1,13 +1,18 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import { signIn } from '../../utils/auth';
+import logo from './LoreStoreLogo.png';
 
 export default function Login() {
   return (
-    <div className="text-center mt-5">
-      <h1>Welcome! Sign In!</h1>
-      <button type="button" className="btn btn-success" onClick={signIn}>
-        Sign In
-      </button>
+    <div className="container" style={{ textAlign: "center" }}>
+      <div className="logo">
+        <img src={logo} alt="" />
+      </div>
+      <div>
+        <Button variant="outline-dark" onClick={signIn}>Enter</Button>
+      </div>
     </div>
+   
   );
 }
