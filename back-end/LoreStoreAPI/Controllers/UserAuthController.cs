@@ -6,7 +6,7 @@ using FirebaseAdmin.Auth;
 
 namespace LoreStoreAPI.Controllers
 {
-
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserAuthController : ControllerBase
