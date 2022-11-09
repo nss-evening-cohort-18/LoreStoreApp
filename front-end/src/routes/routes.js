@@ -17,7 +17,7 @@ export default function Routes({ user }) {
       <Header user={user} setFilter={setFilter} filter={filter} />
       <Switch>
         <Route exact path="/" component={() => <Authenticated user={user} />} />
-        <Route path="/bookdetails" component={() => <BookDetail />} />
+        <Route exact path="/bookdetail/:bookId(\d+)" component={() => <BookDetail />} />
         <Route path="*" component={() => <Authenticated user={user} />} />
       </Switch>
     </div>
