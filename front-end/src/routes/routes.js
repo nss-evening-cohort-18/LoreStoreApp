@@ -9,7 +9,7 @@ export default function Routes({ user }) {
     <div>
       <Switch>
         <Route exact path="/" component={() => <Authenticated user={user} />} />
-        <Route path="/Profile" component={() => <Profile user={user} />} />
+        <Route path="/profile" component={() => <Profile user={user} />} />
         <Route path="*" component={() => <Authenticated user={user} />} />
       </Switch>
     </div>
