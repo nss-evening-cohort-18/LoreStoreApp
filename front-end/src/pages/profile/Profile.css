@@ -1,0 +1,69 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 10%;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+    padding: 5%;
+}
+.details {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+    justify-content: center;
+}
+.nameImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.profileInput {
+    min-width: 300px;
+    margin: 1%;
+}
+.address {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+    align-items: center;
+}
+.myOrderLink, .myPaymentLink {
+    color: black;
+    border-radius: 5px;
+    padding: 1%;
+    text-decoration: none;
+}
+.myOrderLink:hover, .myPaymentLink:hover {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    padding: 1%;
+    text-decoration: none;
+}
+
+.editsButtonHide {
+    visibility: hidden;
+}
+
+
+.editsButtonShow {
+    border-radius: 5px;
+    border: 2px solid black;
+    background-color: black;
+    color: white;
+    padding: 1%;
+    margin-left: 50%;
+    margin-right: 50%;
+    margin-top: 1%;
+}
+.editsButtonShow:hover {
+    border-radius: 5px;
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    padding: 1%;
+}
