@@ -36,11 +36,11 @@ namespace LoreStoreAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetIndividualBook(int id)
         {
-            List<Book> resultBook = _bookData.GetBookById(id);
+            Book resultBook = _bookData.GetBookById(id).FirstOrDefault();
 
-            if (resultBook.Count == 0 || resultBook.Count > 1)
+            if (resultBook == null)
             {
-                return BadRequest("Book could not be found");
+                return NotFound("Book could not be found");
             }
             return Ok(resultBook);
 

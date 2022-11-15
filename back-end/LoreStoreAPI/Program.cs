@@ -35,7 +35,7 @@ builder.Services.AddCors(options =>
                           policy.WithOrigins(builder.Configuration.GetValue<string>("BackendPort"),
                                               builder.Configuration.GetValue<string>("FrontendPort"))
                                 .AllowAnyHeader()
-                                .WithMethods("GEt", "POST", "PUT", "DELETE")
+                                .WithMethods("GET", "POST", "PUT", "DELETE")
                                 .WithExposedHeaders("*");
                       });
 });
