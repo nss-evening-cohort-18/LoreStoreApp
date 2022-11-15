@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Authenticated from '../pages/Authenticated';
+import { BookDetail } from '../pages/bookDetail/BookDetail';
 import Profile from '../pages/profile/Profile';
 
 export default function Routes({ user }) {
@@ -17,6 +18,7 @@ export default function Routes({ user }) {
       <Header user={user} setFilter={setFilter} filter={filter} />
       <Switch>
         <Route exact path="/" component={() => <Authenticated user={user} />} />
+        <Route exact path="/bookdetail/:bookId(\d+)" component={() => <BookDetail />} />
         <Route path="/profile" component={() => <Profile user={user} />} />
         <Route path="*" component={() => <Authenticated user={user} />} />
       </Switch>
