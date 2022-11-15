@@ -141,7 +141,7 @@ namespace LoreStoreAPI.Repositories
                     cmd.Parameters.AddWithValue("@subGenre", book.SubGenre);
                     cmd.Parameters.AddWithValue("@price", book.Price);
                     cmd.Parameters.AddWithValue("@inventoryQuantity", book.InventoryQuantity);
-                    cmd.Parameters.AddWithValue("@photoUrl", book.PhotoUrl);
+                    cmd.Parameters.AddWithValue("@photoUrl", book.PhotoUrl != null ? book.PhotoUrl : DBNull.Value);
 
                     int id = (int)cmd.ExecuteScalar();
                     book.Id = id;
@@ -199,7 +199,7 @@ namespace LoreStoreAPI.Repositories
                     cmd.Parameters.AddWithValue("@subGenre", book.SubGenre);
                     cmd.Parameters.AddWithValue("@price", book.Price);
                     cmd.Parameters.AddWithValue("@inventoryQuantity", book.InventoryQuantity);
-                    cmd.Parameters.AddWithValue("@photoUrl", book.PhotoUrl);
+                    cmd.Parameters.AddWithValue("@photoUrl", book.PhotoUrl != null ? book.PhotoUrl : DBNull.Value);
 
                     return cmd.ExecuteNonQuery();
                 }
