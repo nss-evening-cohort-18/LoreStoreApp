@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Authenticated from '../pages/Authenticated';
 import { BookDetail } from '../pages/bookDetail/BookDetail';
+import Profile from '../pages/profile/Profile';
 
 export default function Routes({ user }) {
   const [filter, setFilter] = useState({ genre: null, subGenre: null, searchString: '' });
@@ -18,6 +19,7 @@ export default function Routes({ user }) {
       <Switch>
         <Route exact path="/" component={() => <Authenticated user={user} />} />
         <Route exact path="/bookdetail/:bookId(\d+)" component={() => <BookDetail />} />
+        <Route path="/profile" component={() => <Profile user={user} />} />
         <Route path="*" component={() => <Authenticated user={user} />} />
       </Switch>
     </div>
