@@ -37,7 +37,7 @@ const Cart = ({ user }) => {
 
   useEffect(() => {
     const setActiveOrder = async () => {
-      const activeOrder = await getActiveOrder(1, user.Aa);
+      const activeOrder = await getActiveOrder(user.id, user.Aa);
       const orderItems = await getOrderItems(activeOrder.id , user.Aa);
       setOrder(activeOrder);
       setOrderItems(orderItems);
