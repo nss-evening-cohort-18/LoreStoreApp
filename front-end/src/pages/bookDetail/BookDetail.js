@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
-  useParams,
-  useHistory,
+  useParams
 } from 'react-router-dom/cjs/react-router-dom.min';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Button } from 'bootstrap';
 import './BookDetail.css';
 
 export const BookDetail = () => {

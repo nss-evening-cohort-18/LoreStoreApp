@@ -67,7 +67,7 @@ const Header = ({ user, setFilter, filter }) => {
           </div>
 
           <div className="user-photo dropdown">
-            <img src={user.photoURL} alt="User Profile" />
+            <img src={user.photoURL} alt="user" />
             <ul className="dropdown-content">
               <Link to="/profile" style={{ textDecoration: 'none' }}>
                 <li>Profile</li>
