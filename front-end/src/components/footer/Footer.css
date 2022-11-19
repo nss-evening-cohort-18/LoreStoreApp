@@ -1,0 +1,31 @@
+.footerLinks {
+    text-align: center;
+    padding: 20px 20px 20px 20px !important;
+    text-decoration: none !important;
+}
+
+.footerContainer {
+    margin: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    margin-top: 15vh !important;
+    font-weight: 600 !important;
+}
+
+.smallLink {
+    text-decoration: none !important;
+    justify-content: center !important;
+    color: black;
+    margin-right: 10vh !important;
+}
+
+.link-control {
+    margin-bottom: 2vh !important;
+}
+
+.links {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
