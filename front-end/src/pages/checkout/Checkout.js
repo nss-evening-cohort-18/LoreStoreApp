@@ -10,6 +10,9 @@ import './Checkout.css';
 export const Checkout = () => {
     return (
         <>
+        <Container>
+          
+        </Container>
         </>
     )
 }

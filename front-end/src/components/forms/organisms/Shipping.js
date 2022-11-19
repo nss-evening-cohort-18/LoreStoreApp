@@ -10,32 +10,37 @@ import { InputText } from '../atoms/InputText';
 import UserApi from '../../../api/userApi';
 
 export const Shipping = ({ user }) => {
-  const {orderId} = useParams(); //variable storing the route parameter
-  const [firstName, updateFirstName] = useState("");
-  const [lastName, updateLastName] = useState("");
-  const [userUsername, setUsername] = useState(user.username ? user.username : null);
-  const [streetAddress1, updateStreetAddress1] = useState("");
-  const [streetAddress2, updateStreetAddress2] = useState("");
-  const [city, updateCity] = useState("");
-  const [state, updateState] = useState("");
-  const [zip, updateZip] = useState("");
+  const { orderId } = useParams(); //variable storing the route parameter
+  const [firstName, updateFirstName] = useState('');
+  const [lastName, updateLastName] = useState('');
+  const [userUsername, setUsername] = useState(
+    user.username ? user.username : null,
+  );
+  const [streetAddress1, updateStreetAddress1] = useState('');
+  const [streetAddress2, updateStreetAddress2] = useState('');
+  const [city, updateCity] = useState('');
+  const [state, updateState] = useState('');
+  const [zip, updateZip] = useState('');
 
   const history = useHistory();
-    
+
   //Fetch orderViewModel
   useEffect(() => {
-    fetch (`https://localhost:7294/api/Order/GetOrderCheckoutViewByOrderId/${orderId}`, {
-      method: 'GET',
-    })
+    fetch(
+      `https://localhost:7294/api/Order/GetOrderCheckoutViewByOrderId/${orderId}`,
+      {
+        method: 'GET',
+      },
+    )
       .then((res) => res.json())
       .then((orderViewModel) => {
-        updateFirstName(orderViewModel.firstName)
-        updateLastName(orderViewModel.lastName)
-        updateStreetAddress1(orderViewModel.address1)
-        updateStreetAddress2(orderViewModel.address2)
-        updateCity(orderViewModel.city)
-        updateState(orderViewModel.state)
-        updateZip(orderViewModel.zip)
+        updateFirstName(orderViewModel.firstName);
+        updateLastName(orderViewModel.lastName);
+        updateStreetAddress1(orderViewModel.address1);
+        updateStreetAddress2(orderViewModel.address2);
+        updateCity(orderViewModel.city);
+        updateState(orderViewModel.state);
+        updateZip(orderViewModel.zip);
       });
   }, []);
 
@@ -56,13 +61,12 @@ export const Shipping = ({ user }) => {
       userTypeId: user.userTypeId,
       userType: {
         name: user.userType.name,
-      }
+      },
     };
     //Perform the PUT request to replace the user
-    UserApi.UpdateUser(user.id, updatedUser, user.Aa)
-    .then(() => { 
+    UserApi.UpdateUser(user.id, updatedUser, user.Aa).then(() => {
       history.push(`/checkout/${orderId}`);
-});
+    });
   };
 
   return (
