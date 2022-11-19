@@ -6,6 +6,7 @@ import Header from '../components/header/Header';
 import Authenticated from '../pages/Authenticated';
 import { BookDetail } from '../pages/bookDetail/BookDetail';
 import Profile from '../pages/profile/Profile';
+import Cart from '../pages/cart/Cart';
 
 
 export default function Routes({ user }) {
@@ -23,6 +24,7 @@ export default function Routes({ user }) {
         <Route exact path="/AdvancedSearch" component={() => <AdvancedSearch />} />
         <Route exact path="/bookdetail/:bookId(\d+)" component={() => <BookDetail />} />
         <Route path="/profile" component={() => <Profile user={user} />} />
+        <Route path="/cart" component={() => <Cart user={user} />}/>
         <Route path="*" component={() => <Authenticated user={user} />} />
       </Switch>
     </div>
