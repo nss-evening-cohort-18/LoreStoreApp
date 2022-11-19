@@ -1,7 +1,7 @@
 // index for router
 import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { AdvancedSearch } from '../components/advancedSearch/AdvancedSearch';
+import { AdvancedSearch } from '../pages/advancedSearch/AdvancedSearch';
 import Header from '../components/header/Header';
 import Authenticated from '../pages/Authenticated';
 import { BookDetail } from '../pages/bookDetail/BookDetail';
