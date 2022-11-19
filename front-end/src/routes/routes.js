@@ -1,6 +1,7 @@
 // index for router
 import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Footer from '../components/footer/Footer';
 import { AdvancedSearch } from '../pages/advancedSearch/AdvancedSearch';
 import Header from '../components/header/Header';
 import Authenticated from '../pages/Authenticated';
@@ -27,6 +28,7 @@ export default function Routes({ user }) {
         <Route path="/cart" component={() => <Cart user={user} />}/>
         <Route path="*" component={() => <Authenticated user={user} />} />
       </Switch>
+      <Footer />
     </div>
   );
 }

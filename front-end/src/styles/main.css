@@ -22,3 +22,20 @@ ul {
   margin: 0 auto;
 }
 
+.welcomeText {
+  margin-right: 20vh;
+}
+
+.cardText {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-left: 40vh;
+  margin-right: 40vh;
+}
+
+.cardText img {
+  width: 400px;
+  height: 200px;
+  object-fit: cover;
+}
