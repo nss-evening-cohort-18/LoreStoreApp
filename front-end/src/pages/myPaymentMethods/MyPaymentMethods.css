@@ -1,0 +1,29 @@
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.paymentMethodsTitle {
+    text-align: center;
+}
+
+.paymentButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    column-gap: 2%;
+    margin-top: 2%;
+}
+
+.paymentButtonsContainer button {
+    padding: 1%;
+}
+
+.monthYearContainer input {
+    width: 10%;
+    text-align: center;
+}
+
+.cvvContainer input {
+    width: 10%;
+    text-align: center;
+}
