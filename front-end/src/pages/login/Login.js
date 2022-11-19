@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { signIn } from '../../utils/auth';
 import logo from './LoreStoreLogo.png';
+import './Login.css';
 
 export default function Login() {
   return (
