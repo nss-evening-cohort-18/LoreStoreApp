@@ -18,7 +18,7 @@ const Footer = () => {
                             </Link>
                         </Box>
                         <Box className="insideLinks">
-                            <Link to="/search" className="smallLink" color="inherit">
+                            <Link to="/advancedSearch" className="smallLink" color="inherit">
                                 Search
                             </Link>
                         </Box>
