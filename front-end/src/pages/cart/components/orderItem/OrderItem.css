@@ -1,0 +1,47 @@
+.delete-btn {
+    color: #333;
+}
+
+.delete-btn:hover {
+    color: darkred;
+    cursor: pointer;
+}
+
+.order-item {
+    height: 150px;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #333;
+}
+
+.quantity {
+    padding-left: 2px;
+}
+
+.quantity input {
+    width: 40%;
+    text-align: center;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    display: none;
+}
+
+.price {
+    padding-left: 2px;
+}
+
+td:last-child {
+    display: flex;
+    justify-content: center;
+    height: 150px;
+    align-items: center;
+}
+
+.author-and-book p {
+    margin: 0;
+    padding: 0;
+}
+
+.author {
+    font-size: 14px;
+}

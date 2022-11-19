@@ -1,0 +1,38 @@
+table {
+    width: 100%;
+    color: #333;
+    border-color: #333;
+}
+
+thead tr {
+    border-bottom: 1px solid #333;
+}
+
+th {
+    font-weight: 500;
+}
+
+.button-container {
+    padding: 10px 20px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.button-group {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.button-group button {
+    margin-inline: 10px;
+    border: 1px solid #333;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 4px 15px;
+}
+
+.button-group button:hover {
+    color: #f9f9f9;
+    background-color: #333;
+}
