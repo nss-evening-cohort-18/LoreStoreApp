@@ -1,6 +1,6 @@
 import React from "react";
 
-const TextArea = ({label, onChange, value}) => {
+export const TextArea = ({label, onChange, value}) => {
     return (
         <fieldset>
             <div className="form-group">

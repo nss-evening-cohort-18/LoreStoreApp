@@ -8,6 +8,7 @@ namespace LoreStoreAPI.Repositories
     {
         List<Order> GetAllOrders();
         Order GetOrderById(int id);
+        OrderCheckoutViewModel GetOrderCheckoutViewByOrderId(int id);
         List<Order> GetAllOrdersByUserId(int id);
         List<Order> GetAllOrdersByOrderDate(DateTime dateTime);
         List<Order> GetAllOrdersByIsComplete(Boolean isComplete);

@@ -9,7 +9,7 @@ using System.Net;
 
 namespace LoreStoreAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
@@ -44,6 +44,18 @@ namespace LoreStoreAPI.Controllers
                 return NoContent();
             }
             return Ok(order);
+        }
+
+        //GET api/<OrderController>/5
+        [HttpGet("GetOrderCheckoutViewByOrderId/{id}")]
+        public IActionResult GetOrderCheckoutViewByOrderId(int id)
+        {
+            OrderCheckoutViewModel orderCheckoutViewModel = _orderRepository.GetOrderCheckoutViewByOrderId(id);
+            if(orderCheckoutViewModel is null)
+            {
+                return NoContent();
+            }
+            return Ok(orderCheckoutViewModel);
         }
 
         //GET api/<OrderController>/5

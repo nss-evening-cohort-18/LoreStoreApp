@@ -50,7 +50,7 @@ export const BookDetail = () => {
               {book.authorLastName ? book.authorLastName : ''}
             </p>
             <p className="book_price">Price ${book.price}</p>
-            <button className="book_addToCart_button">Add to Cart</button>
+            <Button className="book_addToCart_button">Add to Cart</Button>
             <h3 className="book_description_header">Description</h3>
             <p className="book_description">{book.description}</p>
             <h3 className="book_details">Product Details</h3>
