@@ -19,14 +19,14 @@
     text-align: center;
 }
 
-button {
+.goBackButton button {
     border: 2px solid black;
     background-color: white;
     color: black;
     padding: 1%;
 }
 
-button:hover {
+.goBackButton button:hover {
     border: 2px solid white;
     background-color: black;
     color: white;

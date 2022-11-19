@@ -39,7 +39,7 @@ function MyOrders({ user }) {
                 })
             }
         </div>
-        <button onClick={() => { history.push("/profile"); }}>Go back</button>
+        <button className="goBackButton" onClick={() => { history.push("/profile"); }}>Go back</button>
         </div>
     </>
   );
