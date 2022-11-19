@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import UserApi from '../../api/userApi';
 import './Profile.css';
 
@@ -12,6 +13,7 @@ function Profile({ user }) {
   const [userCity, setUserCity] = useState(user.city ? user.city : null);
   const [userZip, setUserZip] = useState(user.zip ? user.zip : null);
   const [editsMade, setEditsMade] = useState(false);
+  const history = useHistory();
   const submitEdits = () => {
     const updatedUser = {
       firebaseUserId: user.firebaseUserId,
@@ -61,8 +63,8 @@ function Profile({ user }) {
             <input className="profileInput" onChange={(e) => { setUserState(e.target.value); setEditsMade(true); }} value={userState == null ? '' : userState} placeholder={user.state ? user.state : 'State (Type to edit)'} />
             <input className="profileInput" onChange={(e) => { setUserZip(e.target.value); setEditsMade(true); }} value={userZip == null ? '' : userZip} placeholder={user.zip ? user.zip : 'Zip (Type to edit)'} />
           </div>
-          <a className="myOrderLink" href="/my-orders" value={user.id}>View My Orders</a>
-          <a className="myPaymentLink" href="/my-payment" value={user.id}>View My Payment Method</a>
+          <button className="myOrderLink" onClick={() => { history.push("myOrders"); }}>View My Orders</button>
+          <button className="myPaymentLink" onClick={() => { history.push("myPaymentMethods"); }}>View My Payment Method</button>
         </div>
       </div>
       <button className={editsMade ? 'editsButtonShow' : 'editsButtonHide'} type="submit" onClick={() => { submitEdits(); }}>Submit Edits</button>

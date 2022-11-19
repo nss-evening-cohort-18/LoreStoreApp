@@ -32,10 +32,12 @@
     align-items: center;
 }
 .myOrderLink, .myPaymentLink {
+    background-color: white;
     color: black;
     border-radius: 5px;
     padding: 1%;
     text-decoration: none;
+    border: none;
 }
 .myOrderLink:hover, .myPaymentLink:hover {
     background-color: black;

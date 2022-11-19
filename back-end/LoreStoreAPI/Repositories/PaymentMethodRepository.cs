@@ -101,6 +101,52 @@ namespace LoreStoreAPI.Repositories
             }
         }
 
+        public PaymentMethod GetPaymentMethodByUserId(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                SELECT id,
+                                        userId,
+                                        firstName,
+                                        lastName,
+                                        cardNumber,
+                                        expirationMonth,
+                                        expirationYear,
+                                        cvv
+                                FROM [dbo].[PaymentMethod]
+                                WHERE userId = " + id;
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            PaymentMethod result = new PaymentMethod()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("id")),
+                                UserId = reader.GetInt32(reader.GetOrdinal("userId")),
+                                FirstName = reader.GetString(reader.GetOrdinal("firstName")),
+                                LastName = reader.GetString(reader.GetOrdinal("lastName")),
+                                CardNumber = reader.GetString(reader.GetOrdinal("cardNumber")),
+                                ExpirationMonth = reader.GetString(reader.GetOrdinal("expirationMonth")),
+                                ExpirationYear = reader.GetString(reader.GetOrdinal("expirationYear")),
+                                Cvv = reader.GetString(reader.GetOrdinal("cvv"))
+                            };
+
+                            return result;
+                        } else
+                        {
+                            return null;
+                        }
+
+                    }
+                }
+            }
+        }
+
         public void AddPaymentMethod(PaymentMethod paymentMethod)
         {
             using (SqlConnection conn = Connection)

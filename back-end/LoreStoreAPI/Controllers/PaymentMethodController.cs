@@ -34,6 +34,18 @@ namespace LoreStoreAPI.Controllers
             return _paymentMethodData.GetPaymentMethod(id);
         }
 
+        [HttpGet("userId/{id}")]
+        public IActionResult ReturnPaymentMethodByUserId(int id)
+        {
+            PaymentMethod result = _paymentMethodData.GetPaymentMethodByUserId(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
         // POST api/<PaymentMethodController>
         [HttpPost]
         public IActionResult PostNewPaymentMethod([FromBody] PaymentMethod paymentMethod)

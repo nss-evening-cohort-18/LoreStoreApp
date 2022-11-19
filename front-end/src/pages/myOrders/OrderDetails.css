@@ -1,0 +1,10 @@
+.orderList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    column-gap: 100px;
+}
+
+.orderTitle {
+    text-align: center;
+}
