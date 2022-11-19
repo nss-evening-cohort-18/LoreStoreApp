@@ -18,6 +18,9 @@ const Header = ({ user, setFilter, filter }) => {
     });
     if (history.location.pathname !== '/search') history.push('/search');
   };
+  const onCartClick = () => {
+    if (history.location.pathname !== '/cart') history.push('/cart');
+  };
   const onKeyDown = (e) => {
     const elem = document.querySelector('.searchInput');
     if (elem === document.activeElement && e.key === 'Enter') {
@@ -59,12 +62,12 @@ const Header = ({ user, setFilter, filter }) => {
           </div>
         </div>
         <div className="header-right header-item">
-          <div className="cart">
+          <div className="cart" onClick={onCartClick}>
             <FaShoppingCart className="shopping-cart" />
           </div>
 
           <div className="user-photo dropdown">
-            <img src={user.photoURL} alt="User Profile Photo" />
+            <img src={user.photoURL} alt="user" />
             <ul className="dropdown-content">
               <Link to="/profile" style={{ textDecoration: 'none' }}>
                 <li>Profile</li>

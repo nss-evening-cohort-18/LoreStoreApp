@@ -9,7 +9,7 @@ using System.Net;
 
 namespace LoreStoreAPI.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class OrderDetailController : ControllerBase

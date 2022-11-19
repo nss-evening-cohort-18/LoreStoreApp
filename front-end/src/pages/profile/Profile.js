@@ -38,8 +38,8 @@ function Profile({ user }) {
   dateFormat += new Date(user.metadata.creationTime).toDateString();
 
   return (
-    <>
-      <div className="content">
+    <div className="content">
+      <div className="profile-content">
         <div className="nameImage">
           <img
             referrerPolicy="no-referrer"
@@ -68,7 +68,7 @@ function Profile({ user }) {
         </div>
       </div>
       <button className={editsMade ? 'editsButtonShow' : 'editsButtonHide'} type="submit" onClick={() => { submitEdits(); }}>Submit Edits</button>
-    </>
+    </div>
   );
 }
 
